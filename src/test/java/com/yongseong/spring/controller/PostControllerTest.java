@@ -38,7 +38,7 @@ public class PostControllerTest {
 
     @Test
     public void readByPostIdTest() throws Exception {
-        Post post = new Post();
+        Post post = new Post("title", "content");
 
         when(postServiceImpl.readByPostId(anyInt())).thenReturn(post);
 

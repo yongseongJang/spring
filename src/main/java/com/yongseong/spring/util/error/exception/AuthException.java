@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class BusinessException extends RuntimeException {
+public class AuthException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     private ErrorCode errorCode;
 
-    public BusinessException(ErrorCode errorCode) {
+    public AuthException(ErrorCode errorCode) {
         super();
         this.errorCode = errorCode;
     }

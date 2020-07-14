@@ -7,6 +7,7 @@ import com.yongseong.spring.repository.PostRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -15,11 +16,13 @@ public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
 
     @Override
+    @Transactional
     public Post readByPostId(int id) {
         return postRepository.findById(id).orElseThrow();
     }
 
     @Override
+    @Transactional
     public void createPost(PostDto postDto) {
         ModelMapper modelMapper = new ModelMapper();
         Post post = modelMapper.map(postDto, Post.class);
@@ -28,6 +31,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public void updateByPostId(int id, PostDto postDto) {
         Post post = readByPostId(id);
 
@@ -38,6 +42,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public void deleteByPostId(int id) {
         postRepository.deleteById(id);
     }

@@ -1,13 +1,15 @@
 package com.yongseong.spring.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AccessLevel;
+import com.yongseong.spring.util.ERole;
+
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,26 +18,20 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @EqualsAndHashCode
 @Entity
-@Table(name = "Post")
-public class Post {
-
+@Table(name = "Role")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+    private Integer id;
 
-    @Column(name = "title")
-    private String title;
-
-    @Column(name = "content")
-    private String content;
+    @Enumerated(EnumType.STRING)
+    private ERole name;
 
     @Builder
-    public Post(String title, String content) {
-        this.title = title;
-        this.content = content;
+    public Role(ERole name) {
+        this.name = name;
     }
 }
