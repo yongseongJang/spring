@@ -42,12 +42,4 @@ public class AuthController {
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
-
-    @GetMapping("/log")
-    public ResponseEntity<HttpStatus> logTest() {
-        logger.info("test logback logger info");
-        logger.error("test logback logger error");
-
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
 }
