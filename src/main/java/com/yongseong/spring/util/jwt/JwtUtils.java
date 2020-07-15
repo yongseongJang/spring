@@ -11,6 +11,8 @@ import javax.xml.bind.DatatypeConverter;
 
 import com.yongseong.spring.dto.UserDetailsDto;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +26,7 @@ import io.jsonwebtoken.UnsupportedJwtException;
 
 @Component
 public class JwtUtils {
+    private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
     public String generateJwtToken(Authentication authentication) {
         UserDetailsDto userPrincipal = (UserDetailsDto) authentication.getPrincipal();
@@ -64,15 +67,15 @@ public class JwtUtils {
             Jwts.parser().setSigningKey(JwtProperties.SECRET).parseClaimsJws(authToken);
             return true;
         } catch (SignatureException e) {
-            // LOG
+            logger.error("Invalid JWT signature: ", e.getMessage());
         } catch (MalformedJwtException e) {
-            // LOG
+            logger.error("Invalid JWT token: ", e.getMessage());
         } catch (ExpiredJwtException e) {
-            // LOG
+            logger.error("JWT token is expired: ", e.getMessage());
         } catch (UnsupportedJwtException e) {
-            // LOG
+            logger.error("JWT token is unsupported: ", e.getMessage());
         } catch (IllegalArgumentException e) {
-            // LOG
+            logger.error("JWT claims string is empty: ", e.getMessage());
         }
 
         return false;
