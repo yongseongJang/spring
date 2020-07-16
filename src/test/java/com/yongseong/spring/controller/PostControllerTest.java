@@ -42,7 +42,8 @@ public class PostControllerTest {
 
         when(postServiceImpl.readByPostId(anyInt())).thenReturn(post);
 
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/posts/1").contentType(MediaType.APPLICATION_JSON);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/posts/id/1")
+                .contentType(MediaType.APPLICATION_JSON);
         mockMvc.perform(requestBuilder).andExpect(status().isOk());
     }
 }

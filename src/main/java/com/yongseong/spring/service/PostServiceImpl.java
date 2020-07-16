@@ -6,6 +6,8 @@ import com.yongseong.spring.repository.PostRepository;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +19,20 @@ public class PostServiceImpl implements PostService {
 
     @Override
     @Transactional
+    public Page<Post> readAllPosts(Pageable pageable) {
+        return postRepository.findAll(pageable);
+    }
+
+    @Override
+    @Transactional
     public Post readByPostId(int id) {
         return postRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    @Transactional
+    public Page<Post> readByPostTitle(String title, Pageable pageable) {
+        return postRepository.findAllByTitle(title, pageable);
     }
 
     @Override
