@@ -15,7 +15,6 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @Configuration
 @PropertySource("classpath:db.properties")
@@ -61,4 +60,5 @@ public class AppConfig {
         transactionManager.setSessionFactory(getSessionFactory().getObject());
         return transactionManager;
     }
+
 }
